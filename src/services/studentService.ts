@@ -19,8 +19,33 @@ export const deleteStudent = async (id: number) => {
 };
 
 // Add new student
-export const addStudent = async (data: any) => {
-  const res = await axiosInstance.post(`/v1/students`, data);
+// studentService.ts
+
+export const addStudent = async (studentData: any, imageFile?: File | null) => {
+  const formData = new FormData();
+
+  // 1. Create a JSON Blob for the DTO part
+  // This tells the backend "this part of the form is JSON"
+  const studentBlob = new Blob([JSON.stringify(studentData)], {
+    type: 'application/json',
+  });
+
+  // 2. Append using the EXACT keys from your Java @RequestPart annotations
+  formData.append('student', studentBlob); // Matches @RequestPart("student")
+
+  if (imageFile) {
+    formData.append('image', imageFile); // Matches @RequestPart("image")
+  }
+
+  // 3. Send the request
+  const res = await axiosInstance.post(`/v1/students`, formData, {
+    headers: {
+      // NOTE: It is often better to omit this header so the browser 
+      // can automatically calculate the "boundary" string.
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+
   return res.data;
 };
 
