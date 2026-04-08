@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { X, Upload, Trash2 } from 'lucide-react';
 import { uploadProfileImage, deleteProfileImage } from '../../services/studentService';
+import type { Student } from '../../types/student';
 
 interface Props {
-    student: any;
+    student: Student;
     onClose: () => void;
     onSuccess: () => void;
 }

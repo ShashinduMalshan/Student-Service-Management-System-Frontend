@@ -1,15 +1,15 @@
-import React from 'react';
-import { Pencil, Trash2, Camera, User, BookOpen, Calendar, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Pencil, Trash2, User, ChevronLeft, ChevronRight } from 'lucide-react';
+import type { Student } from '../types/student';
 
 interface Props {
-    students: any[];
+    students: Student[];
     isSearching: boolean;
     currentPage: number;
     totalPages: number;
     onPageChange: (page: number) => void;
-    onEdit: (s: any) => void;
+    onEdit: (s: Student) => void;
     onDelete: (id: number) => void;
-    onImageClick: (s: any) => void;
+    onImageClick: (s: Student) => void;
 }
 
 const StudentTable = ({ students, isSearching, currentPage, totalPages, onPageChange, onEdit, onDelete, onImageClick }: Props) => {

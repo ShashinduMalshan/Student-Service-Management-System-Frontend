@@ -1,15 +1,20 @@
 import { useState } from 'react';
 import { X } from 'lucide-react';
 import { updateStudent } from '../../services/studentService';
+import type { Student, StudentRequest } from '../../types/student';
 
 interface Props {
-    student: any;
+    student: Student;
     onClose: () => void;
     onSuccess: () => void;
 }
 
 const EditStudentModal = ({ student, onClose, onSuccess }: Props) => {
-    const [form, setForm] = useState({ ...student });
+    const [form, setForm] = useState<StudentRequest>({
+        name: student.name,
+        email: student.email,
+        course: student.course,
+    });
 
     const handleSave = async () => {
         try {

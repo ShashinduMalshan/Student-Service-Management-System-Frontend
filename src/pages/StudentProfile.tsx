@@ -5,17 +5,18 @@ import RegistrationForm from '../components/RegistrationForm';
 import StudentTable from '../components/StudentTable';
 import EditStudentModal from '../components/Modals/EditStudentModal';
 import ImageModal from '../components/Modals/ImageModal';
+import type { Student } from '../types/student';
 
 const StudentProfile = () => {
-    const [students, setStudents] = useState<any[]>([]);
+    const [students, setStudents] = useState<Student[]>([]);
     const [page, setPage] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
     const [searchId, setSearchId] = useState('');
     const [isSearching, setIsSearching] = useState(false);
 
     // Modal States
-    const [editTarget, setEditTarget] = useState<any>(null);
-    const [imageTarget, setImageTarget] = useState<any>(null);
+    const [editTarget, setEditTarget] = useState<Student | null>(null);
+    const [imageTarget, setImageTarget] = useState<Student | null>(null);
 
     const loadStudents = async () => {
         setIsSearching(false);
